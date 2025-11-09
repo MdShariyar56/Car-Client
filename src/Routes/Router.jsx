@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router";
 import MyLayouts from "../Layout/MyLayouts";
 import Home from "../Pages/Home";
-import LoadingSpninner from "../Components/LoadingSpninner";
 import LoginPage from "../Components/LoginPage";
 import RegisterPage from "../Components/RegisterPage";
+import LoadingSpninner from "../Components/LoadingSpninner";
 
 
 
@@ -15,7 +15,8 @@ export const router = createBrowserRouter([
         children:[
             {
                 index: true,
-                element:<Home></Home>
+                element:<Home></Home>,
+                loader: () => fetch('http://localhost:3000/cars')
 
             },
             {
