@@ -6,31 +6,31 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
   const [profileOpen, setProfileOpen] = useState(false);
 
   const navLinkClass = ({ isActive }) =>
-    `block px-4 py-2 rounded transition ${
+    `block px-2 py-2 rounded transition ${
       isActive
-        ? "text-green-400 font-semibold bg-gray-700"
-        : "text-gray-200 hover:text-green-400 hover:bg-gray-700"
+        ? "text-black font-semibold bg-blue-700"
+        : "text-black font-semibold hover:bg-blue-700"
     }`;
 
   const authLinkClass = ({ isActive }) =>
     `block px-4 py-2 text-sm font-semibold rounded border transition text-center ${
       isActive
-        ? "bg-green-500 text-white border-green-500"
-        : "text-green-400 border-green-500 hover:bg-green-600 hover:text-white"
+        ? "bg-blue-500 text-black border-blue-500"
+        : "text-black border-blue-500 hover:bg-blue-600 hover:text-black"
     }`;
 
   return (
-    <nav className="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-900 fixed w-full z-50 shadow">
+    <nav className="bg-white border-gray-200 text-gray-800 fixed w-full z-50 shadow">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-3">
-            <img
-              src="https://i.ibb.co/5g8L5x5F/60860.jpg"
+          <div className="flex items-center gap-1">
+            
+            <Link to="/" className="">
+              <img
+              src="https://i.ibb.co/DH1srVG6/Gemini-Generated-Image-ycpm1xycpm1xycpm-removebg-preview.png"
               alt="RentWheels Logo"
-              className="w-12 h-12 rounded"
+              className="w-72 h-62 rounded"
             />
-            <Link to="/" className="text-2xl font-bold text-green-400 hover:text-green-300">
-              RentWheels
             </Link>
           </div>
 
@@ -132,7 +132,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-gray-800 border-t border-gray-700 px-6 py-4 space-y-3">
+        <div className="md:hidden bg-white border-gray-200 text-gray-800 border-t  px-6 py-4 space-y-3">
           <NavLink to="/" className={navLinkClass} onClick={() => setMenuOpen(false)}>
             Home
           </NavLink>
@@ -165,7 +165,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
                   <img
                     src={user.photoURL || "https://i.ibb.co/2FsfXqM/avatar.png"}
                     alt={user.displayName || user.email}
-                    className="w-10 h-10 rounded-full border-2 border-green-400"
+                    className="w-10 h-10 rounded-full border-2 border-blue-400"
                   />
                   <div>
                     <p className="text-sm font-semibold text-gray-200">{user.displayName || "No Name"}</p>
@@ -177,7 +177,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
                     setMenuOpen(false);
                     onLogout();
                   }}
-                  className="text-sm font-semibold text-white bg-green-600 px-3 py-1 rounded hover:bg-green-700"
+                  className="text-sm font-semibold text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
                 >
                   Logout
                 </button>

@@ -17,19 +17,19 @@ export const router = createBrowserRouter([
                 index: true,
                 element:<Home></Home>
 
+            },
+            {
+                path:"/login",
+                element: <LoginPage></LoginPage>
+            }
+            ,
+            {
+                path:"/register",
+                element: <RegisterPage></RegisterPage>
             }
             
         ]
         
     }
-    ,
-    {
-        path:"/login",
-        element: <LoginPage></LoginPage>
-    }
-    ,
-    {
-        path:"/register",
-        element: <RegisterPage></RegisterPage>
-    }
+    
 ])

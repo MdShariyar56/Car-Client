@@ -7,8 +7,11 @@ const MyLayouts = () => {
     return (
         <div>
            <Navbar></Navbar>
-            <Outlet></Outlet>
-            <Footer></Footer>
+            <div className="pt-16"> 
+        <Outlet />
+        <Footer></Footer>
+      </div>
+      
             
         </div>
     );

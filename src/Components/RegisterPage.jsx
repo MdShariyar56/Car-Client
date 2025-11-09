@@ -11,13 +11,13 @@ const RegisterPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-100">
       <div className="w-full max-w-md bg-base-100 rounded-2xl shadow-xl p-8 border border-green-200 select-none mt-10 mb-10">
-         <div className="w-45 h-16   mx-auto flex items-center justify-center mb-2">
-                        <img src="https://i.ibb.co/dJb93jxQ/67104-removebg-preview.png" alt="" />
+         <div className="w-55 h-10   mx-auto flex items-center justify-center mb-2">
+                        <img src="https://i.ibb.co/DH1srVG6/Gemini-Generated-Image-ycpm1xycpm1xycpm-removebg-preview.png" alt="" />
                     </div>
         <h2 className="text-3xl font-semibold text-center text-black mb-2">
           Create an Account 
         </h2>
-        <p className="text-center text-gray-800 mb-6">
+        <p className="text-center text-gray-600 mb-6">
            Register to start your RentWheels journey
         </p>
 
