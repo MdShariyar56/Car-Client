@@ -3,6 +3,7 @@ import MyLayouts from "../Layout/MyLayouts";
 import Home from "../Pages/Home";
 import LoadingSpninner from "../Components/LoadingSpninner";
 import LoginPage from "../Components/LoginPage";
+import RegisterPage from "../Components/RegisterPage";
 
 
 
@@ -22,9 +23,13 @@ export const router = createBrowserRouter([
         
     }
     ,
-            {
-                path:"/login",
-                element: <LoginPage></LoginPage>
-            }
-    
+    {
+        path:"/login",
+        element: <LoginPage></LoginPage>
+    }
+    ,
+    {
+        path:"/register",
+        element: <RegisterPage></RegisterPage>
+    }
 ])
