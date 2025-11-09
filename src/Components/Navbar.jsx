@@ -149,12 +149,41 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
             Browse Cars
           </NavLink>
 
-           <NavLink to="/login" className={authLinkClass} onClick={() => setMenuOpen(false)}>
+          {!user ? (
+            <>
+              <NavLink to="/login" className={authLinkClass} onClick={() => setMenuOpen(false)}>
                 Login
               </NavLink>
               <NavLink to="/register" className={authLinkClass} onClick={() => setMenuOpen(false)}>
                 Signup
               </NavLink>
+            </>
+          ) : (
+            <div className="pt-2 border-t border-gray-700">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={user.photoURL || "https://i.ibb.co/2FsfXqM/avatar.png"}
+                    alt={user.displayName || user.email}
+                    className="w-10 h-10 rounded-full border-2 border-green-400"
+                  />
+                  <div>
+                    <p className="text-sm font-semibold text-gray-200">{user.displayName || "No Name"}</p>
+                    <p className="text-xs text-gray-400 truncate">{user.email}</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => {
+                    setMenuOpen(false);
+                    onLogout();
+                  }}
+                  className="text-sm font-semibold text-white bg-green-600 px-3 py-1 rounded hover:bg-green-700"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </nav>
