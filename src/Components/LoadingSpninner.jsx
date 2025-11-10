@@ -1,10 +1,10 @@
 import React from "react";
 import Lottie from "lottie-react";
-import loaderAnimation from "../assets/loader.json"; 
+import loaderAnimation from "../assets/loader.json";
 
 const LoadingSpninner = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-white">
+    <div className="fixed inset-0 flex justify-center items-center bg-white z-50">
       <Lottie animationData={loaderAnimation} loop={true} />
     </div>
   );

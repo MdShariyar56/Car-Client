@@ -3,6 +3,9 @@ import LoadingSpninner from "../Components/LoadingSpninner";
 import HeroSlider from "./HeroSlider";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
+import WhyRentWithUs from "./WhyRentWithUs";
+import TopRatedCars from "./TopRatedCars";
+import Testimonials from "./Testimonials";
 
 const Home = () => {
   const [cars, setCars] = useState([]);
@@ -32,35 +35,35 @@ const Home = () => {
   };
 
   return (
-    <div>
+    <div className="bg-blue-50">
       <div className="container mx-auto px-4 mb-4">
         <HeroSlider />
       </div>
 
+
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl font-extrabold mb-8 text-center text-gray-800">
+        <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center text-gray-800">
           Featured Cars
         </h2>
 
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           initial="hidden"
           animate="visible"
           variants={{
             hidden: {},
-            visible: {
-              transition: {
-                staggerChildren: 0.2, 
-              },
-            },
+            visible: { transition: { staggerChildren: 0.2 } },
           }}
         >
           {featuredCars.map((car) => (
             <motion.div
               key={car._id}
-              className="bg-white shadow-lg rounded-xl overflow-hidden cursor-pointer"
+              className="bg-white shadow-lg rounded-xl overflow-hidden cursor-pointer relative"
               variants={cardVariants}
-              whileHover={{ scale: 1.05, boxShadow: "0px 15px 30px rgba(0,0,0,0.2)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0px 15px 30px rgba(0,0,0,0.2)",
+              }}
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div className="relative">
@@ -71,6 +74,15 @@ const Home = () => {
                 />
                 <span className="absolute top-3 left-3 bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
                   {car.category}
+                </span>
+                <span
+                  className={`absolute top-3 right-3 text-xs font-semibold px-3 py-1 rounded-full ${
+                    car.status === "Available"
+                      ? "bg-green-500 text-white"
+                      : "bg-red-500 text-white"
+                  }`}
+                >
+                  {car.status || "Available"}
                 </span>
               </div>
 
@@ -93,9 +105,13 @@ const Home = () => {
                   </p>
                   <Link
                     to={`/cars/${car._id}`}
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700 transition-colors"
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                      car.status === "Available"
+                        ? "bg-yellow-500 text-black hover:bg-yellow-600"
+                        : "bg-gray-400 text-white cursor-not-allowed"
+                    }`}
                   >
-                    View Details
+                    {car.status === "Available" ? "Book Now" : "Unavailable"}
                   </Link>
                 </div>
               </div>
@@ -111,6 +127,13 @@ const Home = () => {
             Show All Cars
           </Link>
         </div>
+      </div>
+
+      {/* Other Sections */}
+      <div className="container mx-auto px-4 py-2">
+        <WhyRentWithUs />
+        <TopRatedCars cars={cars} />
+        <Testimonials />
       </div>
     </div>
   );
