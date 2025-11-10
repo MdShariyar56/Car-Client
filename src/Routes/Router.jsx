@@ -5,6 +5,7 @@ import LoginPage from "../Components/LoginPage";
 import RegisterPage from "../Components/RegisterPage";
 import LoadingSpninner from "../Components/LoadingSpninner";
 import ViewDetails from "../Pages/ViewDetails";
+import BrowseCars from "../Pages/BrowseCars";
 
 
 
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
             {
                 path:'/car-Details',
                 element: <ViewDetails></ViewDetails>
+            },
+            {
+                path: '/browserCars',
+                element: <BrowseCars></BrowseCars>
             }
             
         ]

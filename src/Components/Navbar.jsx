@@ -47,7 +47,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
             <NavLink to="/my-bookings" className={navLinkClass}>
               My Bookings
             </NavLink>
-            <NavLink to="/browse" className={navLinkClass}>
+            <NavLink to="/browserCars" className={navLinkClass}>
               Browse Cars
             </NavLink>
           </div>
