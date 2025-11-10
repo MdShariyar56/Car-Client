@@ -1,0 +1,122 @@
+[
+  {
+    "id": "1",
+    "title": "Player Unknown's Battle Ground: PUBG",
+    "coverPhoto": "https://i.ibb.co/Pz57vC5H/cyberpunk-soldier-futuristic-battle.jpg",
+    "category": "FPS",
+    "downloadLink": "https://www.pubgmobile.com/en-US/home.shtml",
+    "description": "PUBG Mobile is a fast-paced battle royale game where players fight for survival, strategy, and victory on dynamic maps.",
+    "ratings": "4.5",
+    "developer": "Krafton"
+  },
+  {
+    "id": "2",
+    "title": "Call of Duty: Mobile",
+    "coverPhoto": "https://i.ibb.co/6R9H7y0j/CODMPDP-Hero.png",
+    "category": "FPS",
+    "downloadLink": "https://www.callofduty.com/mobile",
+    "description": "Call of Duty: Mobile offers intense multiplayer and battle royale modes with iconic weapons and maps from the COD universe.",
+    "ratings": "4.8",
+    "developer": "Activision"
+  },
+  {
+    "id": "3",
+    "title": "Clash of Clans",
+    "coverPhoto": "https://i.ibb.co/CsvCb9Z7/R.jpg",
+    "category": "Strategy",
+    "downloadLink": "https://supercell.com/en/games/clashofclans/",
+    "description": "Clash of Clans lets you build your village, raise a clan, and compete in epic clan wars for dominance.",
+    "ratings": "4.6",
+    "developer": "Supercell"
+  },
+  {
+    "id": "4",
+    "title": "Genshin Impact",
+    "coverPhoto": "https://i.ibb.co/rKGsCwwQ/OIP.webp",
+    "category": "Adventure RPG",
+    "downloadLink": "https://genshin.hoyoverse.com/",
+    "description": "Genshin Impact is an open-world action RPG featuring elemental magic, exploration, and a stunning anime-inspired world.",
+    "ratings": "4.7",
+    "developer": "HoYoverse"
+  },
+  {
+    "id": "5",
+    "title": "Valorant",
+    "coverPhoto": "https://i.ibb.co/Df1pLf4P/36e15d60-7a46-11ea-bf6f-d6142252cbee-cf.jpg",
+    "category": "Tactical Shooter",
+    "downloadLink": "https://playvalorant.com/",
+    "description": "Valorant is a 5v5 tactical shooter from Riot Games, blending precision gunplay and unique agent abilities.",
+    "ratings": "4.9",
+    "developer": "Riot Games"
+  },
+  {
+    "id": "6",
+    "title": "Among Us",
+    "coverPhoto": "https://cdn.akamai.steamstatic.com/steam/apps/945360/header.jpg",
+    "category": "Party",
+    "downloadLink": "https://innersloth.com/gameAmongUs.php",
+    "description": "Among Us is a multiplayer social deduction game where crewmates work together to find the impostor before it's too late.",
+    "ratings": "4.3",
+    "developer": "Innersloth"
+  },
+  {
+    "id": "7",
+    "title": "Fortnite",
+    "coverPhoto": "https://i.ibb.co/Z64bv47y/full-shot-ninja-wearing-equipment.jpg",
+    "category": "Battle Royale",
+    "downloadLink": "https://www.epicgames.com/fortnite/en-US/home",
+    "description": "Fortnite is a fast-paced battle royale game with building mechanics and frequent content updates.",
+    "ratings": "4.4",
+    "developer": "Epic Games"
+  },
+  {
+    "id": "8",
+    "title": "League of Legends",
+    "coverPhoto": "https://i.ibb.co/NQVr5RN/fantasy-group-adventurers.jpg",
+    "category": "MOBA",
+    "downloadLink": "https://www.leagueoflegends.com/",
+    "description": "League of Legends is a multiplayer online battle arena game where players compete in teams to destroy the enemy base.",
+    "ratings": "4.7",
+    "developer": "Riot Games"
+  },
+  {
+    "id": "9",
+    "title": "Minecraft",
+    "coverPhoto": "https://i.ibb.co/Rk7TFSJn/8-bit-graphics-pixels-scene-with-island.jpg",
+    "category": "Adventure",
+    "downloadLink": "https://www.minecraft.net/",
+    "description": "Minecraft lets players explore, create, and survive in a blocky 3D world with endless possibilities.",
+    "ratings": "4.8",
+    "developer": "Mojang"
+  },
+  {
+    "id": "10",
+    "title": "The Sims 4",
+    "coverPhoto": "https://i.ibb.co/TqmPYVGR/3d-rendering-cartoon-house.jpg",
+    "category": "Simulation",
+    "downloadLink": "https://www.ea.com/games/the-sims/the-sims-4",
+    "description": "The Sims 4 lets you create and control people in a virtual world, building homes, relationships, and careers.",
+    "ratings": "4.5",
+    "developer": "Maxis"
+  },
+  {
+    "id": "11",
+    "title": "Apex Legends",
+    "coverPhoto": "https://i.ibb.co/35Bjj21R/world-collapse-doomsday-scene-digital-painting.jpg",
+    "category": "Battle Royale",
+    "downloadLink": "https://www.ea.com/games/apex-legends",
+    "description": "Apex Legends is a free-to-play battle royale game featuring hero characters with unique abilities in squad-based combat.",
+    "ratings": "4.6",
+    "developer": "Respawn Entertainment"
+  },
+  {
+    "id": "12",
+    "title": "Hearthstone",
+    "coverPhoto": "https://i.ibb.co/r2RtzPtp/2211-w030-n003-513-B-p1-513-1.jpg",
+    "category": "Card Game",
+    "downloadLink": "https://playhearthstone.com/",
+    "description": "Hearthstone is a digital card game where players build decks and compete in turn-based battles using strategy and luck.",
+    "ratings": "4.4",
+    "developer": "Blizzard Entertainment"
+  }
+]

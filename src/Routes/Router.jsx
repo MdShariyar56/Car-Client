@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import LoginPage from "../Components/LoginPage";
 import RegisterPage from "../Components/RegisterPage";
 import LoadingSpninner from "../Components/LoadingSpninner";
+import ViewDetails from "../Pages/ViewDetails";
 
 
 
@@ -27,6 +28,11 @@ export const router = createBrowserRouter([
             {
                 path:"/register",
                 element: <RegisterPage></RegisterPage>
+            }
+            ,
+            {
+                path:'/car-Details',
+                element: <ViewDetails></ViewDetails>
             }
             
         ]
