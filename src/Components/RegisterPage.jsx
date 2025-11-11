@@ -19,6 +19,40 @@ const RegisterPage = () => {
     e.preventDefault();
     setLoading(true);
 
+    // 🔹 Password validation
+    const uppercaseReg = /[A-Z]/;
+    const lowercaseReg = /[a-z]/;
+
+    if (password.length < 6) {
+      setLoading(false);
+      return Swal.fire({
+        icon: "error",
+        title: "Weak Password",
+        text: "Password must be at least 6 characters long.",
+        confirmButtonColor: "#d33",
+      });
+    }
+
+    if (!uppercaseReg.test(password)) {
+      setLoading(false);
+      return Swal.fire({
+        icon: "error",
+        title: "Weak Password",
+        text: "Password must contain at least one uppercase letter.",
+        confirmButtonColor: "#d33",
+      });
+    }
+
+    if (!lowercaseReg.test(password)) {
+      setLoading(false);
+      return Swal.fire({
+        icon: "error",
+        title: "Weak Password",
+        text: "Password must contain at least one lowercase letter.",
+        confirmButtonColor: "#d33",
+      });
+    }
+
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
@@ -35,11 +69,10 @@ const RegisterPage = () => {
         confirmButtonColor: "#3085d6",
         confirmButtonText: "Continue",
       }).then(() => {
-        navigate("/login"); 
+        navigate("/login");
       });
-    } catch (err){
+    } catch (err) {
       setLoading(false);
-
 
       let errorMessage = "Something went wrong. Please try again.";
 
@@ -73,7 +106,7 @@ const RegisterPage = () => {
         <div className="w-55 h-10 mx-auto flex items-center justify-center mb-2">
           <img
             src="https://i.ibb.co/DH1srVG6/Gemini-Generated-Image-ycpm1xycpm1xycpm-removebg-preview.png"
-            alt=""
+            alt="logo"
           />
         </div>
         <h2 className="text-3xl font-semibold text-center text-black mb-2">
@@ -159,6 +192,7 @@ const RegisterPage = () => {
           <span className="mx-2 text-gray-800 text-sm">or</span>
           <div className="w-1/3 border-t border-gray-300"></div>
         </div>
+
         <button className="w-full mt-4 border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition-all duration-300">
           <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google" className="w-5 h-5" />
           <span>Continue with Google</span>
