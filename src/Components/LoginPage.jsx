@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../FireBase/firebase.config";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const googleProvider = new GoogleAuthProvider();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,7 +25,6 @@ const LoginPage = () => {
       const user = userCredential.user;
 
       setLoading(false);
-
       Swal.fire({
         icon: "success",
         title: "Login Successful!",
@@ -52,19 +52,64 @@ const LoginPage = () => {
         case "auth/invalid-credential":
           errorMessage = "Invalid credentials. Please check your login method.";
           break;
+        case "auth/popup-closed-by-user":
+          errorMessage = "You closed the Google login popup. Please try again.";
+          break;
         default:
           errorMessage = `Something went wrong: ${error.message}`;
       }
 
       Swal.fire({
-        icon: "error",
+        icon: error.code === "auth/popup-closed-by-user" ? "info" : "error",
         title: "Login Failed",
         text: errorMessage,
         confirmButtonColor: "#d33",
       });
 
-      
       setPassword("");
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      const user = res.user;
+      if (res._tokenResponse.isNewUser) {
+        Swal.fire({
+          icon: "success",
+          title: "Welcome!",
+          text: `Hello, ${user.displayName || "New User"}! Your account has been created.`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      } else {
+        Swal.fire({
+          icon: "info",
+          title: "Already Registered",
+          text: `Hello again, ${user.displayName || "User"}! You are already registered.`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+      navigate("/"); 
+    } catch (err) {
+      let message = "";
+      if (err.code === "auth/popup-closed-by-user") {
+        message = "You closed the Google login popup. Please try again.";
+        Swal.fire({
+          icon: "info",
+          title: "Sign-in Cancelled",
+          text: message,
+          confirmButtonColor: "#3085d6",
+        });
+      } else {
+        message = "Google sign-in failed: " + err.message;
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: message,
+        });
+      }
     }
   };
 
@@ -138,7 +183,10 @@ const LoginPage = () => {
           <div className="w-1/3 border-t border-gray-300"></div>
         </div>
 
-        <button className="w-full mt-4 border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition-all duration-300">
+        <button 
+          onClick={handleGoogleSignIn}
+          className="w-full mt-4 border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition-all duration-300"
+        >
           <img
             src="https://www.svgrepo.com/show/475656/google-color.svg"
             alt="google"

@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../FireBase/firebase.config";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const RegisterPage = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const googleProvider = new GoogleAuthProvider();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [photoURL, setPhotoURL] = useState("");
@@ -19,7 +20,7 @@ const RegisterPage = () => {
     e.preventDefault();
     setLoading(true);
 
-    // 🔹 Password validation
+    // Password validation
     const uppercaseReg = /[A-Z]/;
     const lowercaseReg = /[a-z]/;
 
@@ -89,14 +90,57 @@ const RegisterPage = () => {
       } else if (err.code === "auth/network-request-failed") {
         errorMessage =
           "Network error. Please check your internet connection and try again.";
+      } else if (err.code === "auth/popup-closed-by-user") {
+        errorMessage = "You closed the Google login popup. Please try again.";
       }
 
       Swal.fire({
-        icon: "error",
+        icon: err.code === "auth/popup-closed-by-user" ? "info" : "error",
         title: "Registration Failed",
         text: errorMessage,
         confirmButtonColor: "#d33",
       });
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider);
+      const user = res.user;
+      if (res._tokenResponse.isNewUser) {
+        Swal.fire({
+          icon: "success",
+          title: "Welcome!",
+          text: `Hello, ${user.displayName || "New User"}! Your account has been created.`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      } else {
+        Swal.fire({
+          icon: "info",
+          title: "Already Registered",
+          text: `Hello again, ${user.displayName || "User"}! You are already registered.`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+      }
+
+      navigate("/"); 
+    } catch (err) {
+      if (err.code === "auth/popup-closed-by-user") {
+        Swal.fire({
+          icon: "info",
+          title: "Sign-in Cancelled",
+          text: "You closed the Google login popup. Please try again.",
+          confirmButtonColor: "#3085d6",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Google sign-in failed: " + err.message,
+        });
+      }
     }
   };
 
@@ -193,7 +237,9 @@ const RegisterPage = () => {
           <div className="w-1/3 border-t border-gray-300"></div>
         </div>
 
-        <button className="w-full mt-4 border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition-all duration-300">
+        <button 
+          onClick={handleGoogleSignIn}
+          className="w-full mt-4 border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition-all duration-300">
           <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google" className="w-5 h-5" />
           <span>Continue with Google</span>
         </button>
