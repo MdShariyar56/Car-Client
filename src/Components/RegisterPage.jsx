@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 import { FaEye, FaRegEyeSlash } from "react-icons/fa";
-import { createUserWithEmailAndPassword, updateProfile, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 import { auth } from "../FireBase/firebase.config";
 import { Link, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
-const RegisterPage = () => {
+const RegisterPage = ({ setUser }) => {
   const [showPassword, setShowPassword] = useState(false);
   const googleProvider = new GoogleAuthProvider();
   const [name, setName] = useState("");
@@ -13,14 +19,11 @@ const RegisterPage = () => {
   const [photoURL, setPhotoURL] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // Password validation
     const uppercaseReg = /[A-Z]/;
     const lowercaseReg = /[a-z]/;
 
@@ -55,18 +58,24 @@ const RegisterPage = () => {
     }
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
       await updateProfile(userCredential.user, {
         displayName: name,
         photoURL: photoURL,
       });
 
+      await signOut(auth);
+
       setLoading(false);
       Swal.fire({
         icon: "success",
         title: "Registration Successful!",
-        text: "Your account has been created.",
+        text: "Your account has been created. Please login to continue.",
         confirmButtonColor: "#3085d6",
         confirmButtonText: "Continue",
       }).then(() => {
@@ -76,26 +85,15 @@ const RegisterPage = () => {
       setLoading(false);
 
       let errorMessage = "Something went wrong. Please try again.";
-
       if (err.code === "auth/email-already-in-use") {
         errorMessage =
           "This email is already registered. Please use another one or login instead.";
       } else if (err.code === "auth/invalid-email") {
         errorMessage = "The email address is invalid. Please enter a valid email.";
-      } else if (err.code === "auth/weak-password") {
-        errorMessage =
-          "Your password is too weak. Please use at least 6 characters with uppercase, lowercase, and numbers.";
-      } else if (err.code === "auth/missing-password") {
-        errorMessage = "Please enter your password.";
-      } else if (err.code === "auth/network-request-failed") {
-        errorMessage =
-          "Network error. Please check your internet connection and try again.";
-      } else if (err.code === "auth/popup-closed-by-user") {
-        errorMessage = "You closed the Google login popup. Please try again.";
       }
 
       Swal.fire({
-        icon: err.code === "auth/popup-closed-by-user" ? "info" : "error",
+        icon: "error",
         title: "Registration Failed",
         text: errorMessage,
         confirmButtonColor: "#d33",
@@ -107,7 +105,10 @@ const RegisterPage = () => {
     try {
       const res = await signInWithPopup(auth, googleProvider);
       const user = res.user;
-      if (res._tokenResponse.isNewUser) {
+
+      setUser(user);
+
+      if (res._tokenResponse?.isNewUser) {
         Swal.fire({
           icon: "success",
           title: "Welcome!",
@@ -118,14 +119,14 @@ const RegisterPage = () => {
       } else {
         Swal.fire({
           icon: "info",
-          title: "Already Registered",
-          text: `Hello again, ${user.displayName || "User"}! You are already registered.`,
+          title: "Welcome Back!",
+          text: `Hello again, ${user.displayName || "User"}!`,
           showConfirmButton: false,
           timer: 2000,
         });
       }
 
-      navigate("/"); 
+      navigate("/");
     } catch (err) {
       if (err.code === "auth/popup-closed-by-user") {
         Swal.fire({
@@ -137,8 +138,8 @@ const RegisterPage = () => {
       } else {
         Swal.fire({
           icon: "error",
-          title: "Oops...",
-          text: "Google sign-in failed: " + err.message,
+          title: "Google sign-in failed",
+          text: err.message,
         });
       }
     }
@@ -162,7 +163,7 @@ const RegisterPage = () => {
 
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-black font-semibold mb-1 select-none">Full Name</label>
+            <label className="block text-black font-semibold mb-1">Full Name</label>
             <input
               type="text"
               name="name"
@@ -188,7 +189,7 @@ const RegisterPage = () => {
           </div>
 
           <div>
-            <label className="block text-black font-semibold mb-1 select-none">Photo URL</label>
+            <label className="block text-black font-semibold mb-1">Photo URL</label>
             <input
               type="text"
               name="photoURL"
@@ -237,10 +238,15 @@ const RegisterPage = () => {
           <div className="w-1/3 border-t border-gray-300"></div>
         </div>
 
-        <button 
+        <button
           onClick={handleGoogleSignIn}
-          className="w-full mt-4 border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition-all duration-300">
-          <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="google" className="w-5 h-5" />
+          className="w-full mt-4 border border-gray-300 py-2 rounded-md flex items-center justify-center gap-2 hover:bg-gray-100 transition-all duration-300"
+        >
+          <img
+            src="https://www.svgrepo.com/show/475656/google-color.svg"
+            alt="google"
+            className="w-5 h-5"
+          />
           <span>Continue with Google</span>
         </button>
 

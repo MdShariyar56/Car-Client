@@ -7,6 +7,7 @@ import TopRatedCars from "./TopRatedCars";
 import Testimonials from "./Testimonials";
 import LoadingSpninner from "../Components/LoadingSpninner";
 import NoData from "../Components/NoData";
+import { MdLocationPin } from "react-icons/md";
 
 
 function debounce(func, delay) {
@@ -69,22 +70,22 @@ if (loading) {
 if (!cars || cars.length === 0) return <p className="text-center mt-10"><NoData></NoData> </p>;
 
   return (
-    <div className="bg-blue-50">
-      <div className="container mx-auto px-4 mb-4">
+    <div className="bg-blue-50 ">
+      <div className=" mb-4">
         <HeroSlider />
       </div>
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="  max-w-9xl mx-auto px-4 lg:px-20 py-8">
         <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center text-gray-800">
           Featured Cars
         </h2>
         <div className="flex justify-center mb-8">
           <input
             type="text"
-            placeholder="Search cars by name..."
+            placeholder="Search by cars name..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full md:w-1/2 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full md:w-1/2 px-4 py-2 border-2  rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
 
@@ -158,22 +159,21 @@ if (!cars || cars.length === 0) return <p className="text-center mt-10"><NoData>
                       <span className="text-lg font-semibold text-blue-600">
                         ${car.rentPrice}/day
                       </span>
-                      <span className="text-sm text-gray-500">{car.location}</span>
+                     <span className="text-sm text-gray-700 flex items-center gap-1">
+                            <MdLocationPin  className="text-red-700" />
+                            {car.location}  
+                        </span>
+
                     </div>
 
                     <div className="flex justify-between items-center mt-4">
                       <p className="text-gray-700 font-medium">
                         Provider: {car.providerName}
                       </p>
-                      <Link
+                     <Link
                         to={`/cars/${car._id}`}
-                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
-                          car.status === "Available"
-                            ? "bg-yellow-500 text-black hover:bg-yellow-600"
-                            : "bg-gray-400 text-white cursor-not-allowed"
-                        }`}
-                      >
-                        {car.status === "Available" ? "Book Now" : "Unavailable"}
+                         className="px-4 py-2 rounded-lg text-sm font-semibold bg-yellow-500 text-black hover:bg-yellow-600 transition">
+                                View Details
                       </Link>
                     </div>
                   </div>
@@ -194,7 +194,7 @@ if (!cars || cars.length === 0) return <p className="text-center mt-10"><NoData>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-2">
+      <div className=" max-w-9xl mx-auto px-4 lg:px-5  py-2">
         <WhyRentWithUs />
         <TopRatedCars cars={cars} />
         <Testimonials />

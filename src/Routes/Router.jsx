@@ -4,14 +4,16 @@ import Home from "../Pages/Home";
 import LoginPage from "../Components/LoginPage";
 import RegisterPage from "../Components/RegisterPage";
 import LoadingSpninner from "../Components/LoadingSpninner";
-import ViewDetails from "../Pages/ViewDetails";
 import BrowseCars from "../Pages/BrowseCars";
+import PrivateRoute from "../Components/PrivateRoute";
+import ViewDetails from "../Pages/ViewDetails";
+
 
 
 
 export const router = createBrowserRouter([
     {
-        Path:'/',
+        path:'/',
         element:<MyLayouts></MyLayouts>,
         hydrateFallbackElement:<LoadingSpninner></LoadingSpninner>,
         children:[
@@ -31,9 +33,13 @@ export const router = createBrowserRouter([
                 element: <RegisterPage></RegisterPage>
             }
             ,
-            {
-                path:'/car-Details',
-                element: <ViewDetails></ViewDetails>
+             {
+                path: "/cars/:id",
+                element: (
+                <PrivateRoute>
+                    <ViewDetails />
+                </PrivateRoute>
+                ),
             },
             {
                 path: '/browserCars',

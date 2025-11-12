@@ -4,7 +4,7 @@ import loaderAnimation from "../assets/NoData.json";
 
 const NoData = () => {
   return (
-    <div className="flex justify-center items-center  bg-blue-100">
+    <div className="flex justify-center items-center py-10  bg-blue-100">
       <Lottie animationData={loaderAnimation} loop={true} />
     </div>
   );

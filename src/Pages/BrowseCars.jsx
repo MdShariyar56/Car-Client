@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import LoadingSpninner from "../Components/LoadingSpninner";
 import NoData from "../Components/NoData";
 import { motion } from "framer-motion";
+import { MdLocationPin } from "react-icons/md";
 
 const BrowseCars = () => {
   const [cars, setCars] = useState([]);
@@ -58,7 +59,7 @@ const BrowseCars = () => {
       </h2>
 
       <motion.div
-        className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        className="  mx-auto px-4 lg:mb-10 lg:px-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
         initial="hidden"
         animate="visible"
         variants={{
@@ -113,7 +114,10 @@ const BrowseCars = () => {
                   <span className="text-lg font-semibold text-blue-600">
                     ${car.rentPrice}/day
                   </span>
-                  <span className="text-sm text-gray-500">{car.location}</span>
+                   <span className="text-sm text-gray-700 flex items-center gap-1">
+                                              <MdLocationPin  className="text-red-700" />
+                                              {car.location}  
+                                          </span>
                 </div>
 
                 <div className="flex justify-between items-center mt-4">
@@ -121,7 +125,7 @@ const BrowseCars = () => {
                     Provider: {car.providerName}
                   </p>
                   <Link
-                    to={`/cars/${car._id}`}
+                     to={`/cars/${car._id}`}
                     className="px-4 py-2 rounded-lg text-sm font-semibold bg-yellow-500 text-black hover:bg-yellow-600 transition"
                   >
                     View Details

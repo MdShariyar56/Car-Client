@@ -1,15 +1,33 @@
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router';
+import React, { useState, useEffect } from "react";
+import { Link, NavLink, useNavigate } from "react-router";
+import { auth } from "../FireBase/firebase.config";
+import { signOut } from "firebase/auth";
 
-const Navbar = ({ user = null, onLogout = () => {} }) => {
+
+const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    setProfileOpen(false);
+    navigate("/login");
+  };
 
   const navLinkClass = ({ isActive }) =>
     `block px-2 py-2 rounded transition ${
       isActive
-        ? "text-black font-semibold bg-blue-700"
-        : "text-black font-semibold hover:bg-blue-700"
+        ? "text-white font-semibold bg-blue-700"
+        : "text-black  font-semibold hover:bg-blue-700 hover:text-white"
     }`;
 
   const authLinkClass = ({ isActive }) =>
@@ -21,19 +39,19 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
 
   return (
     <nav className="bg-white border-gray-200 text-gray-800 fixed w-full z-50 shadow">
-      <div className="container mx-auto px-6 lg:px-16">
+      <div className="mx-auto px-4 lg:px-15">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-1">
-            
             <Link to="/" className="">
               <img
-              src="https://i.ibb.co/DH1srVG6/Gemini-Generated-Image-ycpm1xycpm1xycpm-removebg-preview.png"
-              alt="RentWheels Logo"
-              className="w-72 h-62 rounded"
-            />
+                src="https://i.ibb.co/DH1srVG6/Gemini-Generated-Image-ycpm1xycpm1xycpm-removebg-preview.png"
+                alt="RentWheels Logo"
+                className="w-72 h-62 rounded"
+              />
             </Link>
           </div>
 
+         
           <div className="hidden md:flex items-center gap-6">
             <NavLink to="/" className={navLinkClass}>
               Home
@@ -52,6 +70,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
             </NavLink>
           </div>
 
+   
           <div className="hidden md:flex items-center gap-4">
             {!user ? (
               <>
@@ -71,14 +90,13 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
                   <img
                     src={user.photoURL || "https://i.ibb.co/2FsfXqM/avatar.png"}
                     alt={user.displayName || user.email}
-                    className="w-10 h-10 rounded-full border-2 border-green-400 hover:scale-105 transition"
+                    className="w-11 h-11 rounded-full border-2 border-blue-600 hover:scale-105 transition"
                   />
                 </button>
 
                 {profileOpen && (
                   <div
                     className="absolute right-0 mt-3 w-56 bg-gray-800 border border-gray-700 rounded shadow-lg py-2 z-40"
-                    onMouseLeave={() => setProfileOpen(false)}
                   >
                     <div className="px-4 py-2 border-b border-gray-700">
                       <p className="text-sm font-semibold text-gray-200">
@@ -94,10 +112,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
                       View Profile
                     </Link>
                     <button
-                      onClick={() => {
-                        setProfileOpen(false);
-                        onLogout();
-                      }}
+                      onClick={handleLogout}
                       className="w-full text-left px-4 py-2 hover:bg-red-600 hover:text-white text-red-400"
                     >
                       Log Out
@@ -108,13 +123,19 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
             )}
           </div>
 
+
           <div className="md:hidden flex items-center">
             <button
               aria-label="Toggle menu"
               onClick={() => setMenuOpen((s) => !s)}
               className="p-1 rounded focus:outline-none"
             >
-              <svg className="w-7 h-7 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg
+                className="w-7 h-7 text-gray-200"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -132,7 +153,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-white border-gray-200 text-gray-800 border-t  px-6 py-4 space-y-3">
+        <div className="md:hidden bg-white border-gray-200 text-gray-800 border-t px-6 py-4 space-y-3">
           <NavLink to="/" className={navLinkClass} onClick={() => setMenuOpen(false)}>
             Home
           </NavLink>
@@ -145,7 +166,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
           <NavLink to="/my-bookings" className={navLinkClass} onClick={() => setMenuOpen(false)}>
             My Bookings
           </NavLink>
-          <NavLink to="/browse" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+          <NavLink to="/browserCars" className={navLinkClass} onClick={() => setMenuOpen(false)}>
             Browse Cars
           </NavLink>
 
@@ -173,10 +194,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
                   </div>
                 </div>
                 <button
-                  onClick={() => {
-                    setMenuOpen(false);
-                    onLogout();
-                  }}
+                  onClick={handleLogout}
                   className="text-sm font-semibold text-white bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
                 >
                   Logout
@@ -187,7 +205,7 @@ const Navbar = ({ user = null, onLogout = () => {} }) => {
         </div>
       )}
     </nav>
-    );
+  );
 };
 
 export default Navbar;
