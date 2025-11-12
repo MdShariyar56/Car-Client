@@ -8,6 +8,7 @@ import BrowseCars from "../Pages/BrowseCars";
 import PrivateRoute from "../Components/PrivateRoute";
 import ViewDetails from "../Pages/ViewDetails";
 import AddCar from "../Pages/AddCar";
+import MyListings from "../Pages/MyListings";
 
 
 
@@ -53,6 +54,9 @@ export const router = createBrowserRouter([
             {
                 path: '/browserCars',
                 element: <BrowseCars></BrowseCars>
+            },{
+                path:'/my-listings',
+                element:<MyListings></MyListings>
             }
             
         ]
