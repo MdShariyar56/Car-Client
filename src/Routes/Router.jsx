@@ -7,6 +7,7 @@ import LoadingSpninner from "../Components/LoadingSpninner";
 import BrowseCars from "../Pages/BrowseCars";
 import PrivateRoute from "../Components/PrivateRoute";
 import ViewDetails from "../Pages/ViewDetails";
+import AddCar from "../Pages/AddCar";
 
 
 
@@ -40,6 +41,14 @@ export const router = createBrowserRouter([
                     <ViewDetails />
                 </PrivateRoute>
                 ),
+            },
+            {
+            path: "/add-car",
+            element: (
+                <PrivateRoute>
+                <AddCar />
+                </PrivateRoute>
+            ),
             },
             {
                 path: '/browserCars',
