@@ -38,7 +38,7 @@ const AddCar = () => {
     setLoading(true);
 
     try {
-      const res = await fetch("http://localhost:3000/cars", {
+      const res = await fetch("https://cars-server-wine.vercel.app/cars", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

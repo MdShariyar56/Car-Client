@@ -27,7 +27,7 @@ const Home = () => {
  
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/cars?limit=6&sort=-createdAt")
+    fetch("https://cars-server-wine.vercel.app/cars?limit=6&sort=-createdAt")
       .then((res) => res.json())
       .then((data) => {
         const latest6 = data.slice(-6).reverse();

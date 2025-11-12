@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Auth } from "../Components/AuthContext";
 import Swal from "sweetalert2";
 import LoadingSpninner from "../Components/LoadingSpninner";
+import NoData from "../Components/NoData";
+import { useNavigate } from "react-router";
 
 const MyListings = () => {
+  const navigate = useNavigate();
   const { user, loading: authLoading } = Auth();
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +14,7 @@ const MyListings = () => {
   const fetchCars = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/cars");
+      const res = await fetch("https://cars-server-wine.vercel.app/cars/");
       const data = await res.json();
       const myCars = data.filter((car) => car.providerEmail === user.email);
       setCars(myCars);
@@ -27,7 +30,6 @@ const MyListings = () => {
     if (user) fetchCars();
   }, [user]);
 
-
   const handleDelete = async (carId) => {
     const confirm = await Swal.fire({
       title: "Are you sure?",
@@ -39,7 +41,7 @@ const MyListings = () => {
 
     if (confirm.isConfirmed) {
       try {
-        const res = await fetch(`http://localhost:3000/cars/${carId}`, {
+        const res = await fetch(`https://cars-server-wine.vercel.app/cars/${carId}`, {
           method: "DELETE",
         });
         if (!res.ok) throw new Error("Failed to delete car");
@@ -52,26 +54,27 @@ const MyListings = () => {
     }
   };
 
-  const handleUpdate = (carId) => {
-    Swal.fire("Update", `You can update car with ID: ${carId}`, "info");
+  const handleUpdate = (car) => {
+    navigate(`/update/${car._id}`);
   };
 
   if (authLoading) return <LoadingSpninner />;
 
   return (
     <div className="bg-blue-50 min-h-screen py-8 px-4 sm:px-6 lg:px-20">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-        My Listings
-      </h2>
-
       {loading ? (
         <div className="flex justify-center items-center h-64">
           <LoadingSpninner />
         </div>
       ) : cars.length === 0 ? (
-        <p className="text-center text-gray-700 mt-10">No cars added yet.</p>
+        <p className="text-center text-gray-700 mt-10">
+          <NoData />
+        </p>
       ) : (
         <div className="overflow-x-auto">
+          <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
+            My Listings
+          </h2>
           <table className="min-w-full bg-white rounded-xl shadow-md">
             <thead className="bg-blue-600 text-white">
               <tr>
@@ -94,9 +97,7 @@ const MyListings = () => {
                   <td className="py-3 px-4">
                     <span
                       className={`px-2 py-1 rounded-full text-white text-sm font-semibold ${
-                        car.status === "Booked"
-                          ? "bg-red-500"
-                          : "bg-green-500"
+                        car.status === "Booked" ? "bg-red-500" : "bg-green-500"
                       }`}
                     >
                       {car.status || "Available"}
@@ -104,7 +105,7 @@ const MyListings = () => {
                   </td>
                   <td className="py-3 px-4 flex gap-2">
                     <button
-                      onClick={() => handleUpdate(car._id)}
+                      onClick={() => handleUpdate(car)}
                       className="px-3 py-1 rounded-lg bg-yellow-500 text-black hover:bg-yellow-600 transition"
                     >
                       Update

@@ -13,7 +13,7 @@ const ViewDetails = () => {
   useEffect(() => {
     const fetchCar = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/cars/${id}`);
+        const res = await fetch(`https://cars-server-wine.vercel.app/cars/${id}`);
         if (!res.ok) throw new Error("Failed to fetch car details");
         const data = await res.json();
         setCar(data);
