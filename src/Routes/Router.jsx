@@ -12,6 +12,8 @@ import MyListings from "../Pages/MyListings";
 import UpdateCar from "../Pages/UpdateCar";
 import MyBookings from "../Pages/MyBookings";
 import ProfilePage from "../Pages/ProfilePage";
+import NotFound from "../Components/NotFound";
+
 
 
 
@@ -37,11 +39,11 @@ export const router = createBrowserRouter([
             {
                 path:"/register",
                 element: <RegisterPage></RegisterPage>
-            },{
+            },
+            {
                 path:'/profile',
                 element:<ProfilePage></ProfilePage>
-            }
-            ,
+            },
              {
                 path: "/cars/:id",
                 element: (
@@ -88,7 +90,11 @@ export const router = createBrowserRouter([
             }
             
         ]
-        
-    }
+            
+    },
+    {
+                path: '/*',
+                element: <NotFound></NotFound>
+            }
     
 ])
