@@ -61,13 +61,13 @@ const MyListings = () => {
   if (authLoading) return <LoadingSpninner />;
 
   return (
-    <div className="bg-blue-50 min-h-screen py-8 px-4 sm:px-6 lg:px-20">
+    <div className="bg-blue-50 min-h-screen py-8 px-4 sm:px-6 lg:px-20 ">
       {loading ? (
-        <div className="flex justify-center items-center h-64">
+        <div className="flex justify-center items-center h-screen">
           <LoadingSpninner />
         </div>
       ) : cars.length === 0 ? (
-        <p className="text-center text-gray-700 mt-10">
+        <p className="bg-blue-50 min-h-screen flex justify-center items-center">
           <NoData />
         </p>
       ) : (
@@ -76,8 +76,9 @@ const MyListings = () => {
             My Listings
           </h2>
           <table className="min-w-full bg-white rounded-xl shadow-md">
-            <thead className="bg-blue-600 text-white">
+            <thead className="bg-gray-700 text-white">
               <tr>
+                <th className="py-3 px-4 text-left">#</th>
                 <th className="py-3 px-4 text-left">Car Name</th>
                 <th className="py-3 px-4 text-left">Category</th>
                 <th className="py-3 px-4 text-left">Rent Price</th>
@@ -86,14 +87,15 @@ const MyListings = () => {
               </tr>
             </thead>
             <tbody>
-              {cars.map((car) => (
+              {cars.map((car,i) => (
                 <tr
                   key={car._id}
                   className="border-b hover:bg-gray-50 transition-colors"
                 >
+                   <td className="font-bold py-3 px-4">{i + 1}</td>
                   <td className="py-3 px-4">{car.name}</td>
                   <td className="py-3 px-4">{car.category}</td>
-                  <td className="py-3 px-4">${car.rentPrice}/day</td>
+                  <td className="py-3 px-4 text-black font-semibold"><span className="font-bold text-blue-600">$ </span>{car.rentPrice}<span className="font-bold text-blue-600">/day </span></td>
                   <td className="py-3 px-4">
                     <span
                       className={`px-2 py-1 rounded-full text-white text-sm font-semibold ${

@@ -11,6 +11,7 @@ import AddCar from "../Pages/AddCar";
 import MyListings from "../Pages/MyListings";
 import UpdateCar from "../Pages/UpdateCar";
 import MyBookings from "../Pages/MyBookings";
+import ProfilePage from "../Pages/ProfilePage";
 
 
 
@@ -36,6 +37,9 @@ export const router = createBrowserRouter([
             {
                 path:"/register",
                 element: <RegisterPage></RegisterPage>
+            },{
+                path:'/profile',
+                element:<ProfilePage></ProfilePage>
             }
             ,
              {

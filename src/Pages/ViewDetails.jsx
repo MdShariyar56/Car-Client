@@ -107,16 +107,24 @@ const ViewDetails = () => {
         <p><strong>Category:</strong> {car.category}</p>
         <p><strong>Rent Price:</strong> ${car.rentPrice}</p>
         <p><strong>Location:</strong> {car.location}</p>
-        <p><strong>Status:</strong> {car.status || "Available"}</p>
+       <p><strong>Status: </strong> 
+        <span className={` rounded font-semibold ${car.status === "Booked" ? "text-red-600" : "text-blue-600"}`}>
+          {car.status || "Available"}
+        </span>
+      </p>
+
         <p><strong>Provider Name:</strong> {car.providerName}</p>
         <p><strong>Provider Email:</strong> {car.providerEmail}</p>
 
         <button
-          className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
-          onClick={handleBooking}
-        >
-          Book Now
-        </button>
+        className={`mt-4 px-4  py-2 rounded transition 
+          ${car.status === "Booked" ? "bg-red-500 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 text-white"}`}
+        onClick={handleBooking}
+        disabled={car.status === "Booked"}
+      >
+        {car.status === "Booked" ? "Booked" : "Book Now"}
+      </button>
+
       </div>
     </div>
   );

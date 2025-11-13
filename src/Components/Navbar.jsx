@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router";
 import { auth } from "../FireBase/firebase.config";
 import { signOut } from "firebase/auth";
+import { FaHome } from "react-icons/fa";
+import { IoIosBrowsers, IoIosListBox, IoMdAddCircle } from "react-icons/io";
+import { BiSolidCartAdd } from "react-icons/bi";
+import { MdBookmarkAdd } from "react-icons/md";
 
 
 const Navbar = () => {
@@ -27,14 +31,14 @@ const Navbar = () => {
     `block px-2 py-2 rounded transition ${
       isActive
         ? "text-white font-semibold bg-blue-700"
-        : "text-black  font-semibold hover:bg-blue-700 hover:text-white"
+        : "text-blue-700  font-semibold hover:bg-blue-700 hover:text-white"
     }`;
 
   const authLinkClass = ({ isActive }) =>
-    `block px-4 py-2 text-sm font-semibold rounded border transition text-center ${
+    `block px-4 py-2 text-sm  rounded border transition text-center ${
       isActive
-        ? "bg-blue-500 text-black border-blue-500"
-        : "text-black border-blue-500 hover:bg-blue-600 hover:text-black"
+        ? "bg-blue-500 text-black border-blue-500 font-semibold"
+        : "text-blue-700 border-blue-500 hover:bg-blue-600 hover:text-white font-semibold"
     }`;
 
   return (
@@ -54,19 +58,34 @@ const Navbar = () => {
          
           <div className="hidden md:flex items-center gap-6">
             <NavLink to="/" className={navLinkClass}>
-              Home
+            
+             <div className="flex  gap-2 justify-center items-center">
+                     <FaHome size={20} /> Home
+             </div>
             </NavLink>
             <NavLink to="/add-car" className={navLinkClass}>
-              Add Car
+              <div className="flex  gap-2 justify-center items-center">
+                     <BiSolidCartAdd size={25} />  Add Car
+             </div>
+             
             </NavLink>
             <NavLink to="/my-listings" className={navLinkClass}>
-              My Listings
+              <div className="flex  gap-2 justify-center items-center">
+                     <IoIosListBox size={20} />   My Listings
+             </div>
+             
             </NavLink>
             <NavLink to="/bookings" className={navLinkClass}>
-              My Bookings
+             <div className="flex  gap-2 justify-center items-center">
+                     <MdBookmarkAdd size={20} /> My Bookings
+             </div>
+              
             </NavLink>
             <NavLink to="/browserCars" className={navLinkClass}>
-              Browse Cars
+            <div className="flex  gap-2 justify-center items-center">
+                     <IoIosBrowsers size={20} /> Browse Cars
+             </div>
+              
             </NavLink>
           </div>
 
@@ -131,7 +150,7 @@ const Navbar = () => {
               className="p-1 rounded focus:outline-none"
             >
               <svg
-                className="w-7 h-7 text-gray-200"
+                className="w-7 h-7 text-blue-700"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -153,21 +172,31 @@ const Navbar = () => {
       </div>
 
       {menuOpen && (
-        <div className="md:hidden bg-white border-gray-200 text-gray-800 border-t px-6 py-4 space-y-3">
+        <div className="md:hidden bg-white border-gray-200 text-blue-800 border-t px-6 py-4 space-y-3">
           <NavLink to="/" className={navLinkClass} onClick={() => setMenuOpen(false)}>
-            Home
+             <div className="flex  gap-2  items-center">
+                     <FaHome size={20} /> Home
+             </div>
           </NavLink>
           <NavLink to="/add-car" className={navLinkClass} onClick={() => setMenuOpen(false)}>
-            Add Car
+             <div className="flex  gap-2  items-center">
+                     <BiSolidCartAdd size={25} />  Add Car
+             </div>
           </NavLink>
           <NavLink to="/my-listings" className={navLinkClass} onClick={() => setMenuOpen(false)}>
-            My Listings
+            <div className="flex  gap-2  items-center">
+                     <IoIosListBox size={20} />   My Listings
+             </div>
           </NavLink>
           <NavLink to="/bookings" className={navLinkClass} onClick={() => setMenuOpen(false)}>
-            My Bookings
+            <div className="flex  gap-2  items-center">
+                     <MdBookmarkAdd size={20} /> My Bookings
+             </div>
           </NavLink>
           <NavLink to="/browserCars" className={navLinkClass} onClick={() => setMenuOpen(false)}>
-            Browse Cars
+              <div className="flex  gap-2 items-center">
+                     <IoIosBrowsers size={20} /> Browse Cars
+             </div>
           </NavLink>
 
           {!user ? (
