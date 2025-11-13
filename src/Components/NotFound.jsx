@@ -18,16 +18,16 @@ const NotFound = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-center text-white px-6">
+    <div className="flex flex-col justify-center items-center min-h-screen bg-gradient-to-b from-blue-100 to-blue-200 text-center text-white px-6">
       <div className="w-80 md:w-230">
         <Lottie animationData={notFoundAnimation} loop={true} />
       </div>
 
-      <h1 className="text-3xl md:text-5xl font-bold text-blue-500 mt-4 drop-shadow-lg">
+      <h1 className="text-3xl md:text-5xl font-bold text-blue-700 mt-4 drop-shadow-lg">
         404 - Page Not Found
       </h1>
 
-      <p className="text-gray-300 mt-3 max-w-md">
+      <p className="text-gray-500 mt-3 max-w-md">
         Oops! The page you’re looking for doesn’t exist or might have been moved.
       </p>
 
