@@ -58,8 +58,8 @@ const ViewDetails = () => {
         rentPrice: car.rentPrice,
         providerName: car.providerName,
         providerEmail: car.providerEmail,
-       userEmail: user.email ,  
-       userName:  user.displayName ,      
+        userEmail: user.email ,  
+        userName:  user.displayName ,      
         status: "Booked",
       };
 

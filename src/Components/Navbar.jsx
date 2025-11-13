@@ -62,7 +62,7 @@ const Navbar = () => {
             <NavLink to="/my-listings" className={navLinkClass}>
               My Listings
             </NavLink>
-            <NavLink to="/my-bookings" className={navLinkClass}>
+            <NavLink to="/bookings" className={navLinkClass}>
               My Bookings
             </NavLink>
             <NavLink to="/browserCars" className={navLinkClass}>
@@ -163,7 +163,7 @@ const Navbar = () => {
           <NavLink to="/my-listings" className={navLinkClass} onClick={() => setMenuOpen(false)}>
             My Listings
           </NavLink>
-          <NavLink to="/my-bookings" className={navLinkClass} onClick={() => setMenuOpen(false)}>
+          <NavLink to="/bookings" className={navLinkClass} onClick={() => setMenuOpen(false)}>
             My Bookings
           </NavLink>
           <NavLink to="/browserCars" className={navLinkClass} onClick={() => setMenuOpen(false)}>

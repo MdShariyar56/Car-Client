@@ -10,6 +10,8 @@ import ViewDetails from "../Pages/ViewDetails";
 import AddCar from "../Pages/AddCar";
 import MyListings from "../Pages/MyListings";
 import UpdateCar from "../Pages/UpdateCar";
+import MyBookings from "../Pages/MyBookings";
+
 
 
 
@@ -69,6 +71,14 @@ export const router = createBrowserRouter([
                 element: (
                     <PrivateRoute>
                     <UpdateCar />
+                    </PrivateRoute>
+            ),
+            },
+            {
+                path: "/bookings",
+                element: (
+                    <PrivateRoute>
+                    <MyBookings></MyBookings>
                     </PrivateRoute>
             ),
             }
